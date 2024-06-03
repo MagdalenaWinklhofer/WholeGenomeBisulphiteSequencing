@@ -85,8 +85,8 @@ DNAseq_pipeline/5_dmr_identification/Methylscore/1_out_test_data/slurm-11174868.
 DNAseq_pipeline/5_dmr_identification/Methylscore/2_out_N_vs_A/output/*
 DNAseq_pipeline/5_dmr_identification/
 
-
-
+DNAseq_pipeline/4_3_bwameth_stats/
+DNAseq_pipeline/*.out
 
 
 
