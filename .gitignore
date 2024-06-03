@@ -87,6 +87,6 @@ DNAseq_pipeline/5_dmr_identification/
 
 DNAseq_pipeline/4_3_bwameth_stats/
 DNAseq_pipeline/*.out
-
+DNAseq_pipeline/5_dmr_identification/
 
 
