@@ -1,12 +1,14 @@
 # Instructions and Workflow
-## Test data set 
-First only the test data RNA seq 2015 was used to establish the pipeline. The test data set (RNAseq 2015) contained quality checked and trimmed data, hence step 1-3 were not performed. 
-## Current dataset
+
+
+
+## 1 Data import 
 On the 2023_10_23 I received the final RNA sequencing data. I copied them on nird (for a untouched copy) and on saga (for w orking copy of the files) with the command: `wget --user=winklhofer-rna1 --password=rna1 https://hts-nonsecure.web.sigma2.no/231020_A01447.B.Project_Winklhofer-RNA1-2023-08-30/231020_A01447.B.Project_Winklhofer-RNA1-2023-08-30.tar .`. 
 
+## 2 Unpack data 
 The sequencing files were stored in the `/cluster/work/users/magdalena/RNA` directory. Since they were packed as a `tar` file. I unpacked them with the following command: `tar -xzvf yourfile.tar.gz`
 
-## 1 Quality assessment of the raw RNA reads 
+## 3 Quality assessment of the raw RNA reads 
 ### Needed programs: FastQC
 #### Installation: 
 `FastQC` is a module on saga and does not need to be installed (just loaded). 
@@ -17,7 +19,7 @@ I performed a FASTQC run before and after trimming to compare the read quality (
 If the quality of the reads do not look sufficient hard clipping should only be considered if needed due to low mapping efficiency!!!
 
 
-## 2 Trimming of reads 
+## 4 Trimming of reads 
 ### Needed programs: Trim_Galore
 #### Installation:  
 `Trim_Galore` is a module on saga and does not need to be installed (just loaded).  
@@ -26,20 +28,15 @@ For the test dataset the data were test trimmed, but the trimmed data was not us
 
 For the full RNA sequencing the `4_trimgalore.sh` script was used to trim the sequences. I set as input the forward and reverse sequence (R1&R2) and set the setting to be `--paired`. The sequences were trimmed, if the quality went below the quality threshold of 20. After the trimming was perfomred I ran another round of fastqc to compare the quality of the sequences before and after. 
 
-
-
-## 3 Quality assessment after trimming 
-### Needed programs: FastQC
-#### Installation:  
-`FastQC` is a module on saga and does not need to be installed (just loaded).  
-
-The test trimmed data were quality checked, but not used for the alignment. 
+### 4.1 Quality assessment after trimming 
+### Needed programs: Trim_Galore and FastQC
+#### Installation:
+The test trimmed data were quality checked, in the same script as they were trimmed `trimgalore.sh`. 
 
 For the dataset (RNAseq 2023) I used the trimmed data for the alignment. Here the adapter were removed, but the quality of the reads was still a bit low at the beginning of the reads. Since Hisat2 perfomres soft clipping, I first aligned the reads and checked the alignment efficiency. Due to the fact that the alignment efficiency overall was not lower that 95% in all samples, I did not perform any soft clipping. 
 
 
-
-## 4 Alignment of the trimmed reads 
+## 5 - 7 Alignment of the trimmed reads 
 ### Needed programs: HISAT2
 #### Installation: 
 `HISAT2` is a module on saga and can be loaded. I ran the script `6_hisat_alignment.sh` on 4 cores in parallel. I printed out summary files to each samples. The option `reorder` was used to garantee that the SAM files were printed out in the same order as the reads in the input file.  
@@ -55,7 +52,7 @@ Procedure perfromed:
 - conversion to bam: 11.04.2024
 
 
-## 5 Quantification of the mapped reads 
+## 8 Quantification of the mapped reads 
 ### Needed programs: featureCount
 #### Installation 
 The program was not installed. The module **Subread/2.0.3-GCC-11.2.0** was loaded in saga, which contains all needed comands, like **featureCounts**. 
@@ -66,7 +63,7 @@ NOTE: the `multiple` script is not needed for this investigation!
 
 **Procedure perfromed: 11.04.2024**
 
-## 6 Create Gene Counts Matrix 
+## 9 Create Gene Counts Matrix (ubuntu)
 ### Needed programs: Python (with the kernel: rnaseq)
 #### Installation: 
 I created a conda environment `rnaseq` I which I could use the `HtsAna` function. I imported all the single `cc_counts*.txt` files and created a `gene_matrix_counts.csv` file. Additionally, I also created a table containing all the sample information (`sampl_info.csv`). 
@@ -78,11 +75,6 @@ I created a conda environment `rnaseq` I which I could use the `HtsAna` function
 The program **RStudio** can be downloaded and installed from the university software center. In was installed locally on my computer. I loaded the needed libraries (**DESeq2, tidyverse, airway**) and imported the data (`gene_matrix_counts.csv`, `sampl_info.csv`). I made sure that the column data and the row data of both dataframes were named the same and in the same order. Then I constructed a DESeqDataSet object. I filtered that object to only keep rows that have at least 10 reads. Further I set 'normoxia' as the base (factor) level. Afterwards, I ran the DEseq (differentially expressed gene) analysis. At the end I exported the three comparisons as csv files. 
 
 **Procedure perfromed: 11.04.2024**
-
-
-
-
-
 
 # NOTE: 
 I completed the pipeline until ubuntu point 1_DEG_plot
