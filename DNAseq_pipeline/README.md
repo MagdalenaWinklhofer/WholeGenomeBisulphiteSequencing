@@ -107,7 +107,16 @@ For the run :
 
 
 
+## 6) Filtering of DMRsCG
 
+The first filtering step is to exclude all the rows that do not have the same biological samples in clusters. Afterwards, I filter for that a minimum of 6 samples are represented in the cluster. To filter even further I only take the significantly differentially methylated DMRs. 
+
+NOTE: For now I want to be more conservative in my approach, hence I stop after the second filter step. The file `2_filtered_min_6samples.txt` is copied and named after the coondition in the comparison for further analysis. 
+
+## 7) Match DMRs to gene id's
+
+
+To match the DMRs to genes I import the annotation and extract the gene and transcript id's. Since the current annotation does not include the untranslated regions/ promotors to a full capacity, I add 2000 bp before and after the start and stop of each gene. If a gene starts below 2000 bp the number is set to 0 (there can't be any negative bp). 
 
 
 

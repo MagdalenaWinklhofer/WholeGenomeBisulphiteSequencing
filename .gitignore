@@ -1,4 +1,5 @@
 **/.nextflow.log*
+
 DNAseq_pipeline/.nextflow/history
 DNAseq_pipeline/.nextflow/*
 DNAseq_pipeline/10_bismark_6bedGraph/*
@@ -6,9 +7,23 @@ DNAseq_pipeline/11_bismark_7coverage/*
 DNAseq_pipeline/12_bismark_8nucleotide_coverage/*
 DNAseq_pipeline/13_bismark_report/*
 DNAseq_pipeline/14_DMR/Methylscore/output_A_vs_R/results/*
-
-
-
+DNAseq_pipeline/14_DMR/Methylscore/scripts/2_out_N_vs_A/output/
+DNAseq_pipeline/14_DMR/Methylscore/scripts/3_out_N_vs_R/ouput/
+DNAseq_pipeline/14_DMR/Methylscore/output_A_vs_R/
+DNAseq_pipeline/bwameth_index/*fasta*
+DNAseq_pipeline/bwameth_index/*.out
+DNAseq_pipeline/14_DMR/samplesheet.tsv
+DNAseq_pipeline/DML/DML_out.Rout
+DNAseq_pipeline/DML/slurm-9938336.out
+DNAseq_pipeline/4_2_bwameth_alignment/
+DNAseq_pipeline/4_1_bwameth_index/
+DNAseq_pipeline/5_dmr_identification/*.out
+DNAseq_pipeline/5_dmr_identification/Methylscore/1_out_test_data/slurm-11174868.out
+DNAseq_pipeline/5_dmr_identification/Methylscore/2_out_N_vs_A/output/*
+DNAseq_pipeline/5_dmr_identification/
+DNAseq_pipeline/4_3_bwameth_stats/
+DNAseq_pipeline/*.out
+DNAseq_pipeline/5_dmr_identification/
 DNAseq_pipeline/1_merged_fastq/
 DNAseq_pipeline/2_fastqc_before_trimming/
 DNAseq_pipeline/3_fastqc_after_trimming/
@@ -43,7 +58,7 @@ DNAseq_pipeline/methyldackel_extract/
 DNAseq_pipeline/methyldackel_index/
 DNAseq_pipeline/methyldackel_mbias_plot/
 DNAseq_pipeline/samtools_sorted/
-
+DNAseq_pipeline/6_DMRsCG/
 
 
 GO_analysis/1_agat_extract/
@@ -64,29 +79,9 @@ RNAseq_pipeline/6_aligned_reads_sam/
 RNAseq_pipeline/7_aligned_reads_bam/
 RNAseq_pipeline/8_featureCounts/
 RNAseq_pipeline/*.out
+RNAseq_pipeline/9_create_GeneCountsMatrix/
+RNAseq_pipeline/11_identify_DEG/
 
 
-DNAseq_pipeline/14_DMR/Methylscore/scripts/2_out_N_vs_A/output/
-DNAseq_pipeline/14_DMR/Methylscore/scripts/3_out_N_vs_R/ouput/
-DNAseq_pipeline/14_DMR/Methylscore/output_A_vs_R/
-
-DNAseq_pipeline/bwameth_index/*fasta*
-DNAseq_pipeline/bwameth_index/*.out
-DNAseq_pipeline/14_DMR/samplesheet.tsv
-DNAseq_pipeline/DML/DML_out.Rout
-DNAseq_pipeline/DML/slurm-9938336.out
-
-
-
-DNAseq_pipeline/4_2_bwameth_alignment/
-DNAseq_pipeline/4_1_bwameth_index/
-DNAseq_pipeline/5_dmr_identification/*.out
-DNAseq_pipeline/5_dmr_identification/Methylscore/1_out_test_data/slurm-11174868.out
-DNAseq_pipeline/5_dmr_identification/Methylscore/2_out_N_vs_A/output/*
-DNAseq_pipeline/5_dmr_identification/
-
-DNAseq_pipeline/4_3_bwameth_stats/
-DNAseq_pipeline/*.out
-DNAseq_pipeline/5_dmr_identification/
-
-
+DNAseq_pipeline/dmr_AvsR.pickle
+DNAseq_pipeline/7_match_dmr_to_gene/ccar_annotation.gtf

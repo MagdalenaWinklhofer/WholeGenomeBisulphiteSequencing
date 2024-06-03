@@ -66,15 +66,23 @@ NOTE: the `multiple` script is not needed for this investigation!
 ## 9 Create Gene Counts Matrix (ubuntu)
 ### Needed programs: Python (with the kernel: rnaseq)
 #### Installation: 
-I created a conda environment `rnaseq` I which I could use the `HtsAna` function. I imported all the single `cc_counts*.txt` files and created a `gene_matrix_counts.csv` file. Additionally, I also created a table containing all the sample information (`sampl_info.csv`). 
-**Procedure perfromed: 11.04.2024**
+I created a conda environment `rnaseq` I which I could use the `HtsAna` function. I imported all the single `cc_counts*.txt` files and created a `gene_matrix_counts.csv` file. Additionally, I also created a table containing all the sample information (`sample_info.csv`). 
+**Procedure perfromed: 03.06.2024**
 
-## 7 Differentially Expressed Genes 
+## 10 Differentially Expressed Genes 
 ### Needed programs: R Studio 
 #### Installation
 The program **RStudio** can be downloaded and installed from the university software center. In was installed locally on my computer. I loaded the needed libraries (**DESeq2, tidyverse, airway**) and imported the data (`gene_matrix_counts.csv`, `sampl_info.csv`). I made sure that the column data and the row data of both dataframes were named the same and in the same order. Then I constructed a DESeqDataSet object. I filtered that object to only keep rows that have at least 10 reads. Further I set 'normoxia' as the base (factor) level. Afterwards, I ran the DEseq (differentially expressed gene) analysis. At the end I exported the three comparisons as csv files. 
 
-**Procedure perfromed: 11.04.2024**
+**Procedure perfromed: 03.06.2024**
+
+## 11 Identification of DEG 
+
+To identify the DEGs i imported the output from Rstudio (`comp_anoxia_normoxia.csv`, `comp_reoxygenation_normoxia.csv`, `comp_anoxia_reoxygenation.csv`) and removed the rows that contained NA in the columns 'padj' and 'log2FoldChange'. Afterwards, I split the df in up and down regualted genes and create a dict for plotting. After ple plot is created I export the deg_* dataframes that are 'padj' <= 0.05. Those exported df are needed later for the correlation with DMRs. 
+
+
+
+
 
 # NOTE: 
 I completed the pipeline until ubuntu point 1_DEG_plot
