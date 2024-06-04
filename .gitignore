@@ -59,7 +59,8 @@ DNAseq_pipeline/methyldackel_index/
 DNAseq_pipeline/methyldackel_mbias_plot/
 DNAseq_pipeline/samtools_sorted/
 DNAseq_pipeline/6_DMRsCG/
-
+DNAseq_pipeline/7_match_dmr_to_gene/
+DNAseq_pipeline/8_DMR_gene_expression/
 
 GO_analysis/1_agat_extract/
 GO_analysis/2_split_files_for_array/
