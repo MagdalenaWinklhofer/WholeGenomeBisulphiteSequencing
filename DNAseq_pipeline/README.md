@@ -65,18 +65,18 @@ To asses the mapping efficiency I ran the `bwamth_flagstat.sh` script.
 
 | Run complete | Sample  | Mapping efficiency   | Commend  |
 |---|---|---|---|
-| N  |  N1 |   | slurm-11727410_0.out  |
-| N  |  N2 |   | slurm-11727410_1.out  |
-| N  |  N3 |   | slurm-11727410_2.out  |
-| N  |  N7 |   | slurm-11727410_3.out  |
-| N  |  A1 |   | slurm-11727410_4.out  |
-| N |  A2 |   |  slurm-11727410_5.out |
-| N  |  A4 |   |  slurm-11727410_6.out |
-| N  |  A7 |   |  slurm-11727410_7.out |
-| N  |  24R2 |   | slurm-11727410_8.out  |
-| N  |  24R3 |   | slurm-11727410_9.out  |
-| N  |  24R7 |   | slurm-11727410_10.out  |
-| N  |  24R8 |   | slurm-11727410_11.out  |
+| N  |  N1 | 93.90%  | slurm-11727410_0.out  |
+| N  |  N2 |  93.13%  | slurm-11727410_1.out  |
+| N  |  N3 | 95.29%  | slurm-11727410_2.out  |
+| N  |  N7 | 91.00%   | slurm-11727410_3.out  |
+| N  |  A1 |  95.52% | slurm-11727410_4.out  |
+| N |  A2 |  96.55% |  slurm-11727410_5.out |
+| N  |  A4 | 95.98%  |  slurm-11727410_6.out |
+| N  |  A7 | 92.54% |  slurm-11727410_7.out |
+| N  |  24R2 |  96.79% | slurm-11727410_8.out  |
+| N  |  24R3 | 96.82%  | slurm-11727410_9.out  |
+| N  |  24R7 |  95.47% | slurm-11727410_10.out  |
+| N  |  24R8 |  96.47% | slurm-11727410_11.out  |
 
 (NOTE: Since I lost the flagstat files I ran that script again on the 03.06.2024 to get the mapping efficiency)
 
