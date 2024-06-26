@@ -107,14 +107,25 @@ For the run :
 
 
 
-## 6) Filtering of DMRsCG
-
+## 6 Filtering of DMRsCG
 The first filtering step is to exclude all the rows that do not have the same biological samples in clusters. Afterwards, I filter for that a minimum of 6 samples are represented in the cluster. To filter even further I only take the significantly differentially methylated DMRs. 
 
 NOTE: For now I want to be more conservative in my approach, hence I stop after the second filter step. The file `2_filtered_min_6samples.txt` is copied and named after the coondition in the comparison for further analysis. 
 
-## 7) Match DMRs to gene id's
-To match the DMRs to genes I import the annotation and extract the gene and transcript id's. Since the current annotation does not include the untranslated regions/ promotors to a full capacity, I add 2000 bp before and after the start and stop of each gene. If a gene starts below 2000 bp the number is set to 0 (there can't be any negative bp). 
+## 7.1 Match DMRs to gene id's
+To match the DMRs to genes I import the annotation and extract the gene and transcript id's. Since the current annotation does not include the untranslated regions/ promotors to a full capacity, I add 2000 bp before and after the start and stop of each gene. If a gene starts below 2000 bp the number is set to 0 (there can't be any negative bp). I checked if the DMR was inbetween the borders (+2000bp) of the gene, if that criterion was True I added it to a list. 
+
+
+
+## 7.2 Crossreferencing DMR and DEG 
+The list from step 7 contained geneids that were further compared with the sigDEG. We only found very little correlation. 
+
+
+## 8 Expression of genes in DMRs
+To visualize the expression of the genes that contained DMRs, I filtered the DEG data to only contain the genes that contained DMRs (from step 7.1). Afterwards I created a heatmap with that data. 
+
+## 9 Functional annotation of DMRvsDEG 
+To check what function those genes have (since we only have 2 correlations over 3 comparisons) I wrote a script to match the identified geneids with the corresponding GO term. Sadly, both geneids did not match with any GO term. 
 
 
 
@@ -122,41 +133,6 @@ To match the DMRs to genes I import the annotation and extract the gene and tran
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 6) Crossreferencing DMR and DEG
-This was done with a python script I wrote. I is based on the idea, that the DMR are 1-based. That means they have a specififc number. The differentially expressed genes (DEG) will give back a area (range) of bases (the whole gene). I checked if the DMR is between the bourders of the DEG. 
-
-
-### 6.1) Prefiltering the allc_condition files
-
-The allc_normoxia.tsv, allc_anoxia.tsv and allc_reoxygenation.tsv file were to big to be read into my memory, hence I performed a prefiltering step with the `6_filter_merged_output.py` that was incooperated into the `6_filter_merged_output.sh` script. Here I only consider the 1,4, and 5th column. 
-
-The allc_*.tsv file contains the following columns: 
-1) Chromosome 
-2) position (1-based) 
-3) strand 
-4) sequence context (3-based) 
-5) counts of reads supporting methylation 
-6) read coverage 
-7) indicator of significant methylation (1 if no test is perfomred) 
 
 
 
