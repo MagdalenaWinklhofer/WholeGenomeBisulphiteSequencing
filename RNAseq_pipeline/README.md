@@ -35,6 +35,7 @@ The test trimmed data were quality checked, in the same script as they were trim
 
 For the dataset (RNAseq 2023) I used the trimmed data for the alignment. Here the adapter were removed, but the quality of the reads was still a bit low at the beginning of the reads. Since Hisat2 perfomres soft clipping, I first aligned the reads and checked the alignment efficiency. Due to the fact that the alignment efficiency overall was not lower that 95% in all samples, I did not perform any soft clipping. 
 
+- copied whole dir to work: 06.06.24
 
 ## 5 - 7 Alignment of the trimmed reads 
 ### Needed programs: HISAT2
@@ -46,45 +47,61 @@ For all samples the mapping efficiency overall was above 95%, which is a very go
 Additionally, `SAMtools` was loaded to convert the alignment output (.sam) file into a (.bam) file. 
 
 Procedure perfromed: 
-- genome index 1: 11.04.2024
-- genome_index 2: 11.04.2024
-- alignment: 11.04.2024 (sam) 
-- conversion to bam: 11.04.2024
+- genome index 1: 08.07.2024 (saved in project dir) slurm: 11945728
+- genome_index 2: 08.07.2024 (saved in project dir) slurm:  11945730
+- alignment: 08.07.2024 (sam) slurm: 11945791_0-11
 
+| Run complete | Sample  | Mapping efficiency   | Commend  |
+|---|---|---|---|
+| Y  |  N1 |  96.07% |   |
+| Y  |  N2 |  95.43%  |  |
+| Y  |  N3 |  96.37% |   |
+| Y  |  N7 |  96.21%  |   |
+| Y  |  A1 | 95.79%  |   |
+| Y  |  A2 |  95.01% |   |
+| Y  |  A4 |  95.65% |   |
+| Y  |  A7 | 95.68% |   |
+| Y  |  24R2 | 96.55%  |   |
+| Y  |  24R3 |  96.59% |   |
+| Y  |  24R7 |  96.00% |   |
+| Y  |  24R8 |  96.43% |  |
+
+- conversion to bam: 09.07.2024 (saved on nird)
 
 ## 8 Quantification of the mapped reads 
 ### Needed programs: featureCount
 #### Installation 
-The program was not installed. The module **Subread/2.0.3-GCC-11.2.0** was loaded in saga, which contains all needed comands, like **featureCounts**. 
+The program was not installed. The module **Subread/2.0.4-GCC-11.3.0** was loaded in saga, which contains all needed comands, like **featureCounts**. 
 
 I used the individual BAM files as input to create the feature count txt file for each sample. The feature was `geneid`. The created output was `cc_counts*.txt`, that was downloaded. 
 
 NOTE: the `multiple` script is not needed for this investigation!
 
-**Procedure perfromed: 11.04.2024**
+**Procedure perfromed: 09.07.2024**
 
 ## 9 Create Gene Counts Matrix (ubuntu)
 ### Needed programs: Python (with the kernel: rnaseq)
 #### Installation: 
 I created a conda environment `rnaseq` I which I could use the `HtsAna` function. I imported all the single `cc_counts*.txt` files and created a `gene_matrix_counts.csv` file. Additionally, I also created a table containing all the sample information (`sample_info.csv`). 
-**Procedure perfromed: 03.06.2024**
+**Procedure perfromed: 09.07.2024**
 
 ## 10 Differentially Expressed Genes 
 ### Needed programs: R Studio 
 #### Installation
 The program **RStudio** can be downloaded and installed from the university software center. In was installed locally on my computer. I loaded the needed libraries (**DESeq2, tidyverse, airway**) and imported the data (`gene_matrix_counts.csv`, `sampl_info.csv`). I made sure that the column data and the row data of both dataframes were named the same and in the same order. Then I constructed a DESeqDataSet object. I filtered that object to only keep rows that have at least 10 reads. Further I set 'normoxia' as the base (factor) level. Afterwards, I ran the DEseq (differentially expressed gene) analysis. At the end I exported the three comparisons as csv files. 
 
-**Procedure perfromed: 03.06.2024**
+**Procedure perfromed: 09.07.2024**
 
 ## 11 Identification of DEG 
 
 To identify the DEGs i imported the output from Rstudio (`comp_anoxia_normoxia.csv`, `comp_reoxygenation_normoxia.csv`, `comp_anoxia_reoxygenation.csv`) and removed the rows that contained NA in the columns 'padj' and 'log2FoldChange'. Afterwards, I split the df in up and down regualted genes and create a dict for plotting. After ple plot is created I export the deg_* dataframes that are 'padj' <= 0.05. Those exported df are needed later for the correlation with DMRs. 
 
 
+**Procedure perfromed: 09.07.2024**
 
 
+## 12 Gene Length plot
 
-# NOTE: 
-I completed the pipeline until ubuntu point 1_DEG_plot
+From the DEseq2 analysis in R i exported the total number of genes and the number of genes that had equal to or more than 10 reads. i calculated the min and max gene length and plotted the gene length distribution in a plot. 
 
-Start working from 2_1_DMS_gene_hitlist
+**Procedure perfromed: 09.07.2024**

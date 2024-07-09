@@ -10,7 +10,7 @@
 
 
 # load the needed modules
-ml load Subread/2.0.3-GCC-11.2.0
+ml load Subread/2.0.4-GCC-11.3.0
 
 # show me the loaded modules in a list
 ml list
@@ -54,7 +54,7 @@ output=("cc_counts_A1.txt" \
 
 featureCounts \
 -T 4 -O -C -p -s 2 -t exon -g gene_id \
--a /cluster/work/users/magdalena/RNA/5_hisat_alignment/genome_index/ccar_annotation.gtf \
+-a /cluster/work/users/magdalena/RNA/5_hisat_alignment/genome_index/carcar_annotation_v5.gtf \
 -o /cluster/work/users/magdalena/RNA/6_featureCounts/single/${output[$SLURM_ARRAY_TASK_ID]}\
  /cluster/work/users/magdalena/RNA/5_hisat_alignment/aligned_reads_bam/${input[$SLURM_ARRAY_TASK_ID]}
 
