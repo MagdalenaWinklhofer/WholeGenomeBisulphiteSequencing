@@ -120,6 +120,14 @@ To match the DMRs to genes I import the annotation and extract the gene and tran
 ## 7.2 Crossreferencing DMR and DEG 
 The list from step 7 contained geneids that were further compared with the sigDEG. We only found very little correlation. 
 
+First I imported the DMRs from step 6. After that I imported the gene annotation (Sjannies version: 08.07.2024) and extracted the geneid. I calculated the gene length and sorted them for it (ascending). Afterwards I dropped the duplicated (hence I only kept the longest transcript).  
+
+To incooperate the untranslated regions I addded 5% of the gene length to start and stop. Afterwards I determined if DMRs would lie inbetween gene borders. I created a barplot to illustrate how many DMRs were inbetween gene borders.  
+
+
+
+
+
 
 ## 8 Expression of genes in DMRs
 To visualize the expression of the genes that contained DMRs, I filtered the DEG data to only contain the genes that contained DMRs (from step 7.1). Afterwards I created a heatmap with that data. 
