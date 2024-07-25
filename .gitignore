@@ -64,6 +64,8 @@ DNAseq_pipeline/8_DMR_gene_expression/
 DNAseq_pipeline/dmr_AvsR.pickle
 DNAseq_pipeline/7_match_dmr_to_gene/
 DNAseq_pipeline/9_DMR_functional_annotation/
+DNAseq_pipeline/11_GO_enrichment_analysis/
+DNAseq_pipeline/12_TMM_plot/
 
 
 GO_analysis/1_agat_extract/
@@ -75,6 +77,9 @@ GO_analysis/6_make_db_PfamA/
 GO_analysis/7_Pfam_scan/
 GO_analysis/8_sqlite_database/
 GO_analysis/10_interproscan_protein/
+GO_analysis/1_prepare_data_for_GO_analysis/
+GO_analysis/1_prepare_data_for_GO_analysis/
+GO_analysis/2_filter_GO_erichement_analysis/
 
 
 RNAseq_pipeline/3_fastqc_before_trimming/
@@ -87,8 +92,9 @@ RNAseq_pipeline/*.out
 RNAseq_pipeline/9_create_GeneCountsMatrix/
 RNAseq_pipeline/11_identify_DEG/
 RNAseq_pipeline/12_gene_length_distribution/
+RNAseq_pipeline/14_functional_annotation/
 
 
-
-
+Riboseq/1_TMM_input_data/
+Riboseq/2_plots/
 

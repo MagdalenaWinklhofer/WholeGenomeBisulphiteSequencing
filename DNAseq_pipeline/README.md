@@ -145,8 +145,13 @@ To check what function those genes have (since we only have 2 correlations over 
 
 
 
+## 11 GO enrichment analysis 
+I matched all the gene ids that were hit by a DMR with their GO terms (in python) and performed a GO enrichment analysis (in R). Afterwards I imported the data into a jupyter notebook and calculated additional columns and the padj value. During that step I noticed that the padj value for the small data subset is always 1, probably due to the small sets of genes that were hits by a DMR (NvsA: 14, NvsR: 28, AvsR: 15). 
 
 
 
+
+# 12 Plot expression of genes (hit by DMRs) 
+In this script I the DESeq2 output data to get the p-value. I filtered the output fril from DESeq2 to only contain the geneids that were hit by DMRs. After I sorted the df by p-value and only kept the lowerst p-values (top 10). To plot the expression data I imported the raw featurecounts data. I normalized the expression (TMM) and filtered the df to only keep the rows with geneids that were hit by DMRs. I used the melt function to convert the df from a long format to a short format and added a condition column. To Normalize the measurements, I calculated the mean of each normoxia condition for each geneid and calculated the relative deviation from the before determined mean. Afterwards I tested for significance. Is the standard deviation within a relative tolerance (rtol) of 0.5 (50% margin) of the mean standard deviation a anova test is performed, otherwise the alexander govern test is done. Afterwards a post_hoc test is performed to determine which combinations are significant. To end I plotted the data as a barplot, combined with a swarmplot. 
 
 
