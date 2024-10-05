@@ -17,7 +17,7 @@ The data were unpacked (`tar -xvf XXX.tar`) on SAGA in the directory: `/cluster/
 ## 1 Merge datasets (20.02.2024)
 Since we first performed a test sequencing run (`230526_A01447.A.Project_Winklhofer-Libs1-2023-05-11`; 66GB) and after that the full sequencing of the samples in two parts (`230901_A01447.A.Project_Winklhofer-Libs1-2023-05-11`; 368GB, `240216_A01447.B.Project_Winklhofer-Libs1-2023-05-11.tar`; 423GB) the fastq files were merged to keep as much data as possible. Merging was performed with the `cat` command (appends reads to the original file). For more detailed information consult the script `/cluster/projects/nn8014k/magdalena/WGBS/DNAseq_pipeline/1_merge_fastq.sh`. 
 
-The slurm ouput contains the information of how many lines the individual sequencing attempts contained and how many lines the merged file contained. I checked all R1 and R1 merged files and they number of lines fit for all samples. With that I concluded that the merging step was successful and moved on to assess the quality with FASTQC and to trim off tha adapter and low quality reads with TrimGalore (section 2 and 3). 
+The slurm ouput contains the information of how many lines the individual sequencing attempts contained and how many lines the merged file contained. I checked all R1 and R1 merged files and they number of lines fit for all samples. With that I concluded that the merging step was successful and moved on to assess the quality with FASTQC and to trim off the adapter and low quality reads with TrimGalore (section 2 and 3). 
 
 
 ## 2 Quality assessment (20.02.2024)
