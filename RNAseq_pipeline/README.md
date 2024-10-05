@@ -85,6 +85,3 @@ To identify the DEGs i imported the output from Rstudio (`comp_anoxia_normoxia.c
 
 
 # NOTE: 
-I completed the pipeline until ubuntu point 1_DEG_plot
-
-Start working from 2_1_DMS_gene_hitlist
