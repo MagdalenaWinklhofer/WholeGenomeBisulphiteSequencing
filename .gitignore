@@ -61,6 +61,9 @@ DNAseq_pipeline/samtools_sorted/
 DNAseq_pipeline/6_DMRsCG/
 DNAseq_pipeline/7_match_dmr_to_gene/
 DNAseq_pipeline/8_DMR_gene_expression/
+DNAseq_pipeline/6_extract_genome_matrix_information/NvsA/
+DNAseq_pipeline/6_extract_genome_matrix_information/NvsR/
+
 
 GO_analysis/1_agat_extract/
 GO_analysis/2_split_files_for_array/
@@ -84,5 +87,4 @@ RNAseq_pipeline/9_create_GeneCountsMatrix/
 RNAseq_pipeline/11_identify_DEG/
 
 
-DNAseq_pipeline/dmr_AvsR.pickle
-DNAseq_pipeline/7_match_dmr_to_gene/ccar_annotation.gtf
+
