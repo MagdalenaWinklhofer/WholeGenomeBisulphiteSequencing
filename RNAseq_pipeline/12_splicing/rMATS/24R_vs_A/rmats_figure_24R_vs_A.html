@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>rMATS · 24R vs A Alternative Splicing</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #f5f2ec;
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px 20px;
+  }
+  .figure {
+    background: #fff; width: 100%; max-width: 780px;
+    border: 1.5px solid #d8d2c8; border-radius: 4px; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+  .fig-header {
+    background: #1a1a2e; padding: 24px 32px 20px;
+    border-bottom: 3px solid #e8623a;
+  }
+  .fig-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+    color: #e8623a; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .fig-title {
+    font-family: 'Lora', serif; font-size: 20px; font-weight: 700;
+    color: #fff; line-height: 1.3;
+  }
+  .fig-subtitle {
+    font-family: 'Lora', serif; font-style: italic;
+    font-size: 13px; color: #8a8aaa; margin-top: 6px;
+  }
+  .fig-body { padding: 28px 32px 24px; }
+  .chart-section { margin-bottom: 28px; }
+  .section-label {
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #aaa09a; margin-bottom: 14px; padding-bottom: 6px;
+    border-bottom: 1px solid #ede9e3;
+  }
+  .lollipop-row {
+    display: flex; align-items: center; margin-bottom: 14px;
+    opacity: 0; transform: translateX(-12px);
+    animation: slideIn 0.5s ease forwards;
+  }
+  @keyframes slideIn { to { opacity:1; transform:translateX(0); } }
+  .event-tag {
+    width: 46px; flex-shrink: 0; font-size: 11px;
+    font-weight: 500; letter-spacing: 0.04em; color: #1a1a2e;
+  }
+  .bar-track {
+    flex: 1; height: 8px; background: #f0ece6;
+    border-radius: 4px; position: relative; overflow: visible;
+  }
+  .bar-total {
+    position: absolute; left:0; top:0; height:100%;
+    background: #ede9e3; border-radius: 4px;
+  }
+  .bar-sig {
+    position: absolute; left:0; top:0; height:100%; border-radius: 4px;
+  }
+  .split-track {
+    flex: 1; height: 10px; display: flex;
+    border-radius: 4px; overflow: hidden;
+  }
+  .split-n   { background: #5b8db8; }
+  .split-24r { background: #e8623a; }
+  .count-label {
+    width: 52px; flex-shrink: 0; text-align: right;
+    font-size: 11px; color: #888; padding-left: 8px;
+  }
+  .summary-strip {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 1px; background: #ede9e3;
+    border-top: 1px solid #ede9e3; margin-top: 4px;
+  }
+  .strip-cell {
+    background: #fff; padding: 14px 10px 12px; text-align: center;
+    opacity: 0; animation: fadeUp 0.4s ease forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(6px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .strip-event {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.06em; color: #fff; padding: 2px 7px;
+    border-radius: 3px; margin-bottom: 8px;
+  }
+  .strip-sig {
+    font-family: 'Lora', serif; font-size: 22px; font-weight: 700;
+    color: #1a1a2e; line-height: 1; margin-bottom: 2px;
+  }
+  .strip-total { font-size: 9px; color: #aaa; letter-spacing: 0.06em; }
+  .strip-pct  { font-size: 10px; font-weight: 500; margin-top: 5px; }
+  .fig-footer {
+    padding: 16px 32px 22px; border-top: 1px solid #ede9e3;
+    background: #faf8f5; display: flex; gap: 24px;
+    flex-wrap: wrap; align-items: flex-start;
+  }
+  .legend-group { display: flex; flex-direction: column; gap: 5px; }
+  .legend-item  { display: flex; align-items: center; gap: 6px; font-size: 10.5px; color: #555; }
+  .legend-swatch { width:20px; height:7px; border-radius:3px; flex-shrink:0; }
+  .caption {
+    flex: 1; min-width: 200px;
+    font-family: 'Lora', serif; font-style: italic;
+    font-size: 11.5px; color: #888; line-height: 1.65;
+  }
+</style>
+</head>
+<body>
+<div class="figure">
+
+  <div class="fig-header">
+    <div class="fig-label">Figure — Alternative Splicing Analysis</div>
+    <div class="fig-title">Differential Splicing Events: 24R vs A</div>
+    <div class="fig-subtitle">rMATS · Junction Counts · FDR &lt; 0.05</div>
+  </div>
+
+  <div class="fig-body">
+    <div class="chart-section">
+      <div class="section-label">A &nbsp;·&nbsp; Significant events per type (JC)</div>
+      
+      <div class="lollipop-row" style="animation-delay:0.0s">
+        <div class="event-tag">SE</div>
+        <div class="bar-track">
+          <div class="bar-total" style="width:100.0%"></div>
+          <div class="bar-sig"   style="width:2.0%; background:#3d7ebf"></div>
+        </div>
+        <div class="count-label">712</div>
+      </div>
+
+      <div class="lollipop-row" style="animation-delay:0.1s">
+        <div class="event-tag">RI</div>
+        <div class="bar-track">
+          <div class="bar-total" style="width:19.1%"></div>
+          <div class="bar-sig"   style="width:2.8%; background:#2aa876"></div>
+        </div>
+        <div class="count-label">1,014</div>
+      </div>
+
+      <div class="lollipop-row" style="animation-delay:0.2s">
+        <div class="event-tag">A3SS</div>
+        <div class="bar-track">
+          <div class="bar-total" style="width:13.3%"></div>
+          <div class="bar-sig"   style="width:0.6%; background:#c65d9e"></div>
+        </div>
+        <div class="count-label">210</div>
+      </div>
+
+      <div class="lollipop-row" style="animation-delay:0.3s">
+        <div class="event-tag">A5SS</div>
+        <div class="bar-track">
+          <div class="bar-total" style="width:7.9%"></div>
+          <div class="bar-sig"   style="width:0.4%; background:#e8a020"></div>
+        </div>
+        <div class="count-label">128</div>
+      </div>
+
+      <div class="lollipop-row" style="animation-delay:0.4s">
+        <div class="event-tag">MXE</div>
+        <div class="bar-track">
+          <div class="bar-total" style="width:9.1%"></div>
+          <div class="bar-sig"   style="width:0.1%; background:#888888"></div>
+        </div>
+        <div class="count-label">39</div>
+      </div>
+    </div>
+    <div class="chart-section" style="margin-bottom:0">
+      <div class="section-label">B &nbsp;·&nbsp; Inclusion direction: 24R (higher) vs A (higher)</div>
+      
+      <div class="lollipop-row" style="animation-delay:0.5s">
+        <div class="event-tag">SE</div>
+        <div class="split-track">
+          <div class="split-n"   style="width:34.4%"></div>
+          <div class="split-24r" style="width:65.6%"></div>
+        </div>
+        <div class="count-label" style="color:#aaa;font-size:10px">
+          245 / 467
+        </div>
+      </div>
+
+      <div class="lollipop-row" style="animation-delay:0.6s">
+        <div class="event-tag">RI</div>
+        <div class="split-track">
+          <div class="split-n"   style="width:46.0%"></div>
+          <div class="split-24r" style="width:54.0%"></div>
+        </div>
+        <div class="count-label" style="color:#aaa;font-size:10px">
+          466 / 548
+        </div>
+      </div>
+
+      <div class="lollipop-row" style="animation-delay:0.7s">
+        <div class="event-tag">A3SS</div>
+        <div class="split-track">
+          <div class="split-n"   style="width:48.6%"></div>
+          <div class="split-24r" style="width:51.4%"></div>
+        </div>
+        <div class="count-label" style="color:#aaa;font-size:10px">
+          102 / 108
+        </div>
+      </div>
+
+      <div class="lollipop-row" style="animation-delay:0.8s">
+        <div class="event-tag">A5SS</div>
+        <div class="split-track">
+          <div class="split-n"   style="width:43.0%"></div>
+          <div class="split-24r" style="width:57.0%"></div>
+        </div>
+        <div class="count-label" style="color:#aaa;font-size:10px">
+          55 / 73
+        </div>
+      </div>
+
+      <div class="lollipop-row" style="animation-delay:0.9s">
+        <div class="event-tag">MXE</div>
+        <div class="split-track">
+          <div class="split-n"   style="width:56.4%"></div>
+          <div class="split-24r" style="width:43.6%"></div>
+        </div>
+        <div class="count-label" style="color:#aaa;font-size:10px">
+          22 / 17
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-strip">
+    
+    <div class="strip-cell" style="animation-delay:0.90s">
+      <div><span class="strip-event" style="background:#3d7ebf">SE</span></div>
+      <div class="strip-sig">712</div>
+      <div class="strip-total">/ 35,974 total</div>
+      <div class="strip-pct" style="color:#3d7ebf">2.0%</div>
+    </div>
+
+    <div class="strip-cell" style="animation-delay:0.98s">
+      <div><span class="strip-event" style="background:#2aa876">RI</span></div>
+      <div class="strip-sig">1,014</div>
+      <div class="strip-total">/ 6,888 total</div>
+      <div class="strip-pct" style="color:#2aa876">14.7%</div>
+    </div>
+
+    <div class="strip-cell" style="animation-delay:1.06s">
+      <div><span class="strip-event" style="background:#c65d9e">A3SS</span></div>
+      <div class="strip-sig">210</div>
+      <div class="strip-total">/ 4,777 total</div>
+      <div class="strip-pct" style="color:#c65d9e">4.4%</div>
+    </div>
+
+    <div class="strip-cell" style="animation-delay:1.14s">
+      <div><span class="strip-event" style="background:#e8a020">A5SS</span></div>
+      <div class="strip-sig">128</div>
+      <div class="strip-total">/ 2,832 total</div>
+      <div class="strip-pct" style="color:#e8a020">4.5%</div>
+    </div>
+
+    <div class="strip-cell" style="animation-delay:1.22s">
+      <div><span class="strip-event" style="background:#888888">MXE</span></div>
+      <div class="strip-sig">39</div>
+      <div class="strip-total">/ 3,291 total</div>
+      <div class="strip-pct" style="color:#888888">1.2%</div>
+    </div>
+  </div>
+
+  <div class="fig-footer">
+    <div class="legend-group">
+      <div class="legend-item"><div class="legend-swatch" style="background:#e0dbd4"></div> All detected events</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#3d7ebf"></div> Significant (FDR &lt; 0.05)</div>
+    </div>
+    <div class="legend-group">
+      <div class="legend-item"><div class="legend-swatch" style="background:#5b8db8"></div> Higher inclusion in 24R</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#e8623a"></div> Higher inclusion in A</div>
+    </div>
+    <div class="caption">Panel A shows all detected (grey) vs significant (coloured) splicing events for each type. Panel B shows the directional split among significant events. RI (Retained Intron) events dominate with 1,014 significant changes. Across all types, A shows 58% of directional events with higher inclusion compared to 24R.</div>
+  </div>
+
+</div>
+</body>
+</html>
