@@ -3,15 +3,15 @@ import os
 import re
 
 # --- CONFIGURE THESE PATHS ---
-INPUT_DIR = "/cluster/projects/nn8014k/magdalena/WGBS/RNAseq_pipeline/12_splicing/rMATS/N_vs_A/output_N_vs_A"   # directory with .txt files
-OUTPUT_DIR = "/cluster/projects/nn8014k/magdalena/WGBS/RNAseq_pipeline/12_splicing/02_match_splicing_to_dmr/N_vs_A/output_N_vs_A"     # directory to store *_dmr files
+INPUT_DIR = "/cluster/projects/nn8014k/magdalena/WGBS/RNAseq_pipeline/17_splicing/rMATS/N_vs_A/output_N_vs_A"   # directory with .txt files
+OUTPUT_DIR = "/cluster/projects/nn8014k/magdalena/WGBS/RNAseq_pipeline/17_splicing/02_match_splicing_to_dmr"     # directory to store *_dmr files
 # ------------------------------
 
 # Environment: 
 #    module load Anaconda3/2022.10
 #    source ${EBROOTANACONDA3}/bin/activate
 #    conda activate /cluster/projects/nn8014k/magdalena/conda_environments/general
-# USAGE: python filter_dmr.py . --sample1 N --sample2 A
+
 
 
 # ID lists (duplicates already removed, first occurrence kept)
