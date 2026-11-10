@@ -66,6 +66,8 @@ DNAseq_pipeline/7_match_dmr_to_gene/
 DNAseq_pipeline/9_DMR_functional_annotation/
 DNAseq_pipeline/11_GO_enrichment_analysis/
 DNAseq_pipeline/12_TMM_plot/
+DNAseq_pipeline/6_extract_genome_matrix_information/NvsA/
+DNAseq_pipeline/6_extract_genome_matrix_information/NvsR/
 
 
 GO_analysis/1_agat_extract/
@@ -232,5 +234,17 @@ RNAseq_pipeline/16_KEGG_annotation/2026_03_04_ko_definition.csv
 RNAseq_pipeline/16_KEGG_annotation/ccar_annotation_v5.interproscan.GO.tsv
 RNAseq_pipeline/16_KEGG_annotation/ccar_annotation_v5.interproscan.tsv
 RNAseq_pipeline/16_KEGG_annotation/dmr_annotation_overview.csv
-.gitignore
-.gitignore
+
+# rMATS splicing (large intermediates; scripts and summary outputs stay tracked)
+RNAseq_pipeline/17_splicing/01_bam_files/
+RNAseq_pipeline/17_splicing/**/*.bam
+RNAseq_pipeline/17_splicing/**/*.bai
+RNAseq_pipeline/17_splicing/**/*.sif
+RNAseq_pipeline/17_splicing/**/*.gtf
+RNAseq_pipeline/17_splicing/**/slurm-*.out
+RNAseq_pipeline/17_splicing/**/tmp_*/
+RNAseq_pipeline/17_splicing/rMATS*/*/output_*/
+RNAseq_pipeline/17_splicing/02_match_splicing_to_dmr/*/output_*/
+RNAseq_pipeline/17_splicing/rMATS_with_additional_option/*/b[12]_*.txt
+RNAseq_pipeline/17_splicing/rMATS_with_additional_option/*/*_vs_*.html
+RNAseq_pipeline/17_splicing/02_match_splicing_to_dmr/12_02_01_dmr_listing.txt
